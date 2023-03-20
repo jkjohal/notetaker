@@ -1,3 +1,4 @@
+//import required dependencies
 const util = require('util');
 const fs = require('fs');
 
@@ -6,6 +7,7 @@ const uuidv1 = require('uuid/v1');
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
+//CRUD for notes
 class Store {
     read() {
       return readFileAsync('db/db.json', 'utf8');
@@ -32,9 +34,9 @@ class Store {
   
     createNewNote(note) {
       const { title, text } = note;
-  
+        //make sure notes contain a title and text content in order to be created
       if (!title || !text) {
-        throw new Error("Note 'title' and 'text' cannot be blank");
+        throw new Error("You must enter a title and text for this note!");
       }
   
       
@@ -47,11 +49,6 @@ class Store {
         .then(() => newNote);
     }
   
-    deleteNote(id) {
-      return this.getNotes()
-        .then((notes) => notes.filter((note) => note.id !== id))
-        .then((filteredNotes) => this.write(filteredNotes));
-    }
   }
   
   module.exports = new Store();
