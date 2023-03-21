@@ -8,7 +8,7 @@ const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
 //CRUD for notes
-class Store {
+class StoreNote {
     read() {
       return readFileAsync('db/db.json', 'utf8');
     }
@@ -34,7 +34,6 @@ class Store {
   
     createNewNote(note) {
       const { title, text } = note;
-        //make sure notes contain a title and text content in order to be created
       if (!title || !text) {
         throw new Error("You must enter a title and text for this note!");
       }
@@ -51,4 +50,4 @@ class Store {
   
   }
   
-  module.exports = new Store();
+  module.exports = new StoreNote();
