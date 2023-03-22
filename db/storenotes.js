@@ -43,8 +43,13 @@ class StoreNote {
         .then((notes) => [...notes, newNote])
         .then((updatedNotes) => this.write(updatedNotes))
         .then(() => newNote);
+    };
+  
+    deleteNote(note){
+      app.delete('/notes/:id', (req, res)) => {
+        const itemId = req.params.id;
+        res.status(204).send();
     }
-  
-  }
-  
+  };
+};
   module.exports = new StoreNote();
