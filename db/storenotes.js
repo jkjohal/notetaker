@@ -1,16 +1,13 @@
 //import required dependencies
 const util = require('util');
 const fs = require('fs');
-
-const uuidv1 = require('uuid/v1');
-
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
 //CRUD for notes
 class StoreNote {
     read() {
-      return readFileAsync('db/db.json', 'utf8');
+      return readFileAsync('db/db.json');
     }
   
     write(note) {
@@ -39,7 +36,7 @@ class StoreNote {
       }
   
       
-      const newNote = { title, text, id: uuidv1() };
+      const newNote = { title, text };
   
       
       return this.getNotes()
